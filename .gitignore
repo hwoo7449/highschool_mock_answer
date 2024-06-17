@@ -1,0 +1,18 @@
+# Backend
+backend/node_modules/
+backend/PDF/
+
+# Frontend
+frontend/build/
+frontend/node_modules/
+
+# Python
+crawler/venv
+crawler/__pycache__/
+crawler/.pytest_cache/
+crawler/.coverage
+crawler/result/
+
+# 기타
+.DS_Store
+.vscode
