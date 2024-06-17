@@ -2,27 +2,27 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function SearchForm() {
-  const [subject, setSubject] = useState('사회문화');  // 기본값을 '사회문화'로 설정
+  const [subject, setSubject] = useState('사회문화');
   const [query, setQuery] = useState('');
   const [error, setError] = useState('');
-  const [logs, setLogs] = useState([]);  // 로그를 저장할 상태 추가
+  const [logs, setLogs] = useState([]);
   const [backendUrl, setBackendUrl] = useState('');
-  const [logsVisible, setLogsVisible] = useState(false);  // 로그 표시 여부를 관리하는 상태 추가
+  const [logsVisible, setLogsVisible] = useState(false);
 
   useEffect(() => {
     setBackendUrl(process.env.REACT_APP_BACKEND_URL);
   }, []);
 
   const addLog = (message) => {
-    setLogs((prevLogs) => [...prevLogs, message]);  // 로그 추가
-    console.log(message); // 콘솔에도 로그 출력
+    setLogs((prevLogs) => [...prevLogs, message]);
+    console.log(message);
   };
 
   const handleSearch = async (searchQuery = query) => {
     addLog(`handleSearch called with searchQuery="${searchQuery}"`);
-    addLog(`Backend URL: ${backendUrl}/search`);
+    addLog(`Backend URL: ${backendUrl}/api/search`);
     try {
-      const response = await axios.get(`${backendUrl}/search`, {
+      const response = await axios.get(`${backendUrl}/api/search`, {
         params: {
           query: searchQuery,
           subject: subject,

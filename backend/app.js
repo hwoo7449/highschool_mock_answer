@@ -15,7 +15,7 @@ const validateSearchQuery = (query) => {
     return pattern1.test(query) || pattern2.test(query);
 };
 
-app.get('/search', (req, res) => {
+app.get('/api/search', (req, res) => {  // 경로를 /api/search로 수정
     const query = req.query.query;
     const subject = req.query.subject;
 
@@ -36,9 +36,8 @@ app.get('/search', (req, res) => {
     }
 
     const filePath = path.join(__dirname, 'PDF', fileName);
-    console.log(`Searching for file: ${filePath}`); // 디버그 로그 추가
+    console.log(`Searching for file: ${filePath}`);
 
-    // 파일이 존재하는지 확인
     if (!fs.existsSync(filePath)) {
         console.error(`File not found: ${filePath}`);
         return res.status(404).json({ error: "해당 파일을 찾을 수 없습니다." });
