@@ -16,3 +16,4 @@ crawler/result/
 # 기타
 .DS_Store
 .vscode
+.env
