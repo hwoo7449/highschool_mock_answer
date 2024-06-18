@@ -8,6 +8,7 @@ function SearchForm() {
   const [logs, setLogs] = useState([]);
   const [backendUrl, setBackendUrl] = useState('');
   const [logsVisible, setLogsVisible] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState('');
 
   useEffect(() => {
     setBackendUrl(process.env.REACT_APP_BACKEND_URL);
@@ -33,7 +34,7 @@ function SearchForm() {
       addLog(`Response status: ${response.status}`);
 
       const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
-      window.open(url);
+      setPdfUrl(url);  // Blob URL을 상태로 저장하여 iframe에 표시
     } catch (err) {
       addLog(`Search error: ${err}`);
       setError(err.response?.data?.error || '검색 중 오류가 발생했습니다.');
@@ -89,6 +90,9 @@ function SearchForm() {
         <button onClick={handleQuickSearch}>빠른 검색</button>
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
+      {pdfUrl && (
+        <iframe src={pdfUrl} width="600px" height="600px" title="PDF Viewer"></iframe>
+      )}
       <div>
         <button onClick={() => setLogsVisible(!logsVisible)}>
           {logsVisible ? '로그 숨기기' : '로그 보기'}
