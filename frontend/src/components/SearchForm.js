@@ -71,7 +71,7 @@ function SearchForm() {
           과목:
           <select value={subject} onChange={(e) => setSubject(e.target.value)}>
             <option value="사회문화">사회문화</option>
-            <option value="생활과 윤리">생활과 윤리</option>
+            <option value="생활과윤리">생활과 윤리</option>
             <option value="한국지리">한국지리</option>
           </select>
         </label>
