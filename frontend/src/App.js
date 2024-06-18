@@ -1,5 +1,7 @@
 import React from 'react';
 import SearchForm from './components/SearchForm';
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import './App.css'; // CSS 파일을 추가합니다.
 
 function App() {
@@ -10,6 +12,8 @@ function App() {
       </header>
       <main>
         <SearchForm />
+        <Analytics />
+        <SpeedInsights />
       </main>
     </div>
   );
