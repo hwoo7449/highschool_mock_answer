@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import PDFViewer from './PDFViewer';  // 추가
 
 function SearchForm() {
   const [subject, setSubject] = useState('사회문화');
@@ -34,7 +35,7 @@ function SearchForm() {
       addLog(`Response status: ${response.status}`);
 
       const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
-      setPdfUrl(url);  // Blob URL을 상태로 저장하여 iframe에 표시
+      setPdfUrl(url);  // Blob URL을 상태로 저장하여 PDFViewer에 전달
     } catch (err) {
       addLog(`Search error: ${err}`);
       setError(err.response?.data?.error || '검색 중 오류가 발생했습니다.');
@@ -90,9 +91,7 @@ function SearchForm() {
         <button onClick={handleQuickSearch}>빠른 검색</button>
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {pdfUrl && (
-        <iframe src={pdfUrl} width="600px" height="600px" title="PDF Viewer"></iframe>
-      )}
+      {pdfUrl && <PDFViewer url={pdfUrl} />}  // PDFViewer 컴포넌트 사용
       <div>
         <button onClick={() => setLogsVisible(!logsVisible)}>
           {logsVisible ? '로그 숨기기' : '로그 보기'}
