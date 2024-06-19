@@ -91,7 +91,7 @@ function SearchForm() {
         <button onClick={handleQuickSearch}>빠른 검색</button>
       </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {pdfUrl && <PDFViewer url={pdfUrl} />}  // PDFViewer 컴포넌트 사용
+      {pdfUrl && <PDFViewer url={pdfUrl} />}
       <div>
         <button onClick={() => setLogsVisible(!logsVisible)}>
           {logsVisible ? '로그 숨기기' : '로그 보기'}
