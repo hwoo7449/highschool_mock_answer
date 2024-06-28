@@ -75,14 +75,25 @@ if not os.path.exists(PDF_FOLDER):
 #2. '##학년도 수능 @@번'
 def create_filename(title):
     parts = title.split()
-    year = parts[0].replace('년', '')
+    # ex) 2023년 고3 10월 학평(서울) 경제
+    # ex) 2023년 2024 대학수학능력시험 한국지리  
+    year = int(parts[0].replace('년', ''))
+    
     if '모평' in title or '학평' in title:
-        academic_year = str(int(year) + 1)[-2:] + '학년도'
+        month = parts[2].replace('월', '')
+        
+        if month == '3' or month == '4' or month == '7' or month == '10':
+            academic_year = str(year)[-2:] + '학년도'
+        elif month == '6' or month == '9':
+            academic_year = str(year + 1)[-2:] + '학년도'
+        else:
+            raise ValueError(f"Unknown month: {month}")
+
         month = parts[2].replace('월', '')
         subject = parts[-1].replace('사회·문화', '사회문화')
         return f'{academic_year} {month}월 {subject}.pdf'
     elif '대학수학능력시험' in title:
-        academic_year = str(int(year) + 1)[-2:] + '학년도'
+        academic_year = str(year + 1)[-2:] + '학년도'
         exam_type = '수능'
         subject = parts[-1].replace('사회·문화', '사회문화')
         return f'{academic_year} {exam_type} {subject}.pdf'
